@@ -1,0 +1,23 @@
+import os
+import pandas as pd
+
+# 定义文件夹路径
+folder_path = 'C:\\Users\micailu\\PycharmProjects\\pythonProject1\\mountain_ping_en\\data\dicts_json\\'
+
+# 遍历文件夹中的所有文件
+for filename in os.listdir(folder_path):
+
+    if filename.endswith('.json'):  # 确保只处理JSON文件
+    #     # 组合完整的文件路径
+        file_path = os.path.join(folder_path, filename)
+        print(file_path)
+        # 读取JSON文件到DataFrame
+        df = pd.read_json(file_path)
+
+        # 将文件名从 .json 更改为 .csv
+        csv_filename = filename.replace('.json', '.csv')
+        csv_path = os.path.join(folder_path, csv_filename)
+
+        # 保存DataFrame为CSV文件
+        df.to_csv(csv_path, index=False)
+        print(f'Saved {csv_path}')
